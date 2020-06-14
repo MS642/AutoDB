@@ -6,7 +6,7 @@ var con = mysql.createConnection({
   port: "3308",
   user: "root",
   password: "",
-  database: "autodb",
+//   database: "autodb",
 })
 
 //Connect To MySQL
@@ -18,4 +18,5 @@ con.connect(function(err) {
       if(err) throw err;
       console.log("Database Created!");
   });
+  
 })
