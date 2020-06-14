@@ -6,6 +6,7 @@ var con = mysql.createConnection({
   port: "3308",
   user: "root",
   password: "",
+  database: "autodb",
 })
 
 //Connect To MySQL
