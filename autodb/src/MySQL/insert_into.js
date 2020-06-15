@@ -1,18 +1,16 @@
-// import * from "./server";
-
 var mysql = require('mysql');
 
-//Create A connection
+// Create a connection
 var con = mysql.createConnection({
   host: "localhost",
   port: "3308",
   user: "root",
   password: "",
   database: "autodb",
-})
+});
 
-
-  con.connect(function(err) {
+// Inserting into database
+con.connect(function(err) {
     if(err) throw err;
     console.log("Connected To the database:");
  
@@ -21,4 +19,4 @@ var con = mysql.createConnection({
         if(err) throw err;
         console.log("Data Inserted into autodb...");
     });
-  })
+});

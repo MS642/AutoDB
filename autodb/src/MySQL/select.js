@@ -7,15 +7,15 @@ var con = mysql.createConnection({
   user: "root",
   password: "",
   database: "autodb",
-})
+});
 
 
-  con.connect(function(err) {
+con.connect(function(err) {
     if(err) throw err;
     console.log("Connected To the database:");
  
     var sqlQuery = "SELECT * FROM customer";
-    con.query(sqlQuery, function(err, result) {
+    con.query(sqlQuery, function(err, result, fields) {
         if(err) throw err;
         // console.log(result);
         // console.log(result[0]);
@@ -24,4 +24,4 @@ var con = mysql.createConnection({
             console.log(result[i].name);
         }
     });
-  })
+});
