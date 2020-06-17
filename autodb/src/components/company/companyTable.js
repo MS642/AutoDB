@@ -10,11 +10,18 @@ import TablePagination from '@material-ui/core/TablePagination';
 import TableRow from '@material-ui/core/TableRow';
 
 const columns = [
-  { id: 'Customer_ID', label: 'Customer_ID', minWidth: 170 },
-  { id: 'Name', label: 'Name', minWidth: 100 },
+  { id: 'Company_ID', label: 'Company_ID', minWidth: 170 },
+  { id: 'Company_Name', label: 'Company_Name', minWidth: 100 },
   {
-    id: 'Billing_Address',
-    label: 'Billing_Address',
+    id: 'No_Employees',
+    label: 'No_Employees',
+    minWidth: 170,
+    align: 'right',
+    format: (value) => value.toLocaleString('en-US'),
+  },
+  {
+    id: 'No_Customers',
+    label: 'No_Customers',
     minWidth: 170,
     align: 'right',
     format: (value) => value.toLocaleString('en-US'),
@@ -30,7 +37,7 @@ const useStyles = makeStyles({
   },
 });
 
-export default function StickyHeadTable({rows}) {
+export default function ({rows}) {
   const classes = useStyles();
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
@@ -48,7 +55,8 @@ export default function StickyHeadTable({rows}) {
     <Paper className={classes.root}>
       <TableContainer className={classes.container}>
         <Table stickyHeader aria-label="sticky table">
-          <caption>Customers</caption>
+          <caption>Companies</caption>
+            <script>{console.log(rows)}</script>
           <TableHead>
             <TableRow>
               {columns.map((column) => (
@@ -65,7 +73,8 @@ export default function StickyHeadTable({rows}) {
           <TableBody>
             {rows.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((row) => {
               return (
-                <TableRow hover role="checkbox" tabIndex={-1} key={row.Customer_ID}>
+                <TableRow hover role="checkbox" tabIndex={-1} key={row.Company_ID}>
+                <script>{console.log(row)}</script>
                   {columns.map((column) => {
                     const value = row[column.id];
                     return (
