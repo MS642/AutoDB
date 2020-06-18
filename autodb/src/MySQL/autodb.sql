@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 15, 2020 at 08:28 PM
+-- Generation Time: Jun 18, 2020 at 06:34 AM
 -- Server version: 10.4.11-MariaDB
 -- PHP Version: 7.4.6
 
@@ -42,7 +42,9 @@ INSERT INTO `accident` (`Accident_ID`, `Damage_Cost`, `Description`) VALUES
 (2, 150, 'minor crash, paint job needed'),
 (3, 50000, 'crashed into a department store and mcdonalds while DUI, car is a classic impala 67 '),
 (4, 1450, 'left front door scratched by juvenile delinquents'),
-(5, 2500, 'mining accident');
+(5, 2500, 'mining accident'),
+(6, 60000, 'car exploded'),
+(7, 75221, 'driver was cooking in his car');
 
 -- --------------------------------------------------------
 
@@ -64,7 +66,8 @@ INSERT INTO `applied_policies` (`Policy_ID`, `Plan_ID`, `Description`) VALUES
 (1, 5, 'no late payments'),
 (2, 5, 'max 1 person only'),
 (3, 1, 'no surprise charges'),
-(4, 2, 'max 3 claims per 10 years');
+(4, 2, 'max 3 claims per 10 years'),
+(5, 4, 'must be a member with at least 500 loyalty points');
 
 -- --------------------------------------------------------
 
@@ -131,6 +134,7 @@ INSERT INTO `coverage` (`Monthly_Cost`, `Total_Liability_Covered`, `Collision Co
 (300, 100, 100, 100),
 (400, 150, 150, 100),
 (500, 300, 100, 100),
+(600, 1555, 200, 4555),
 (1000, 800, 100, 100);
 
 -- --------------------------------------------------------
@@ -177,8 +181,11 @@ CREATE TABLE `customer_owns_vehicle` (
 --
 
 INSERT INTO `customer_owns_vehicle` (`Vehicle_VIN`, `Model`, `Color`, `Year`, `Customer_ID`) VALUES
+(123456, 'Lexus GS', 'White', 2015, 3),
+(555444, 'Mercedes E850', 'Black', 2018, 7),
+(987654, 'Jeep', 'Red', 1995, 4),
 (2161616, 'Ford Mustang', 'Red', 67, 5),
-(2656961, 'Ford Focus', 'Silver', 2011, 7),
+(2656961, 'Ford Focus', 'Silver', 2011, 5),
 (3216515, 'Toyota Supra', 'Black', 2009, 2),
 (7878454, 'Toyota Prius', 'Blue', 2015, 4);
 
@@ -222,6 +229,8 @@ CREATE TABLE `drives` (
 --
 
 INSERT INTO `drives` (`Vehicle_VIN`, `License_ID`) VALUES
+(555444, 598653),
+(555444, 721020),
 (2656961, 532326),
 (3216515, 131321),
 (7878454, 562185);
@@ -246,7 +255,10 @@ CREATE TABLE `employees` (
 
 INSERT INTO `employees` (`Employee_ID`, `Company_ID`, `Job_ID`, `Name`, `Address`) VALUES
 (1, 1, 4, 'Bruce Wui', '355 Sunset Ave'),
-(2, 1, 2, 'Dylan Smokes', '555 Holy Ave');
+(2, 1, 2, 'Dylan Smokes', '555 Holy Ave'),
+(3, 5, 9, 'Bobo Haha', '343 Scenic Drive'),
+(4, 5, 10, 'Martinez Smith', '99th Coriander Avenue'),
+(5, 1, 2, 'Melissa Tjia', '20th Rose Ave');
 
 -- --------------------------------------------------------
 
@@ -265,6 +277,7 @@ CREATE TABLE `hospital` (
 
 INSERT INTO `hospital` (`Hospital_Name`, `Address`) VALUES
 ('North Cross Hospital', '22th Evenstan Ave'),
+('Robin\'s General Hospital', 'East Romano Drive'),
 ('St Peter\'s Hospital', '15th Peterson Street'),
 ('UBC Hospital', '101 University Drive'),
 ('Vancouver General Hospital', 'West 10th Broadway');
@@ -287,8 +300,11 @@ CREATE TABLE `hospitalized` (
 --
 
 INSERT INTO `hospitalized` (`Accident_ID`, `Hospital_Name`, `Room_Number`, `Bill`) VALUES
+(1, 'UBC Hospital', 359, 15000),
 (3, 'St Peter\'s Hospital', 255, 225990),
-(5, 'North Cross Hospital', 112, 56200);
+(5, 'North Cross Hospital', 112, 56200),
+(6, 'Vancouver General Hospital', 255, 1800000),
+(7, 'Robin\'s General Hospital', 564, 2515980);
 
 -- --------------------------------------------------------
 
@@ -354,7 +370,10 @@ CREATE TABLE `investigated_by` (
 
 INSERT INTO `investigated_by` (`Badge_#`, `Accident_ID`, `Name`) VALUES
 (11778, 5, 'Anthony Anthony'),
-(72534, 3, 'Anthony Anthony');
+(12213, 2, 'Ratna Kapoor'),
+(72534, 3, 'Anthony Anthony'),
+(78886, 4, 'John Wilkes'),
+(888975, 7, 'James Lao');
 
 -- --------------------------------------------------------
 
@@ -419,7 +438,7 @@ INSERT INTO `plan_details` (`Plan_ID`, `Company_ID`, `Plan_Name`, `Monthly Cost`
 --
 
 CREATE TABLE `vehicle_insured_with_plan_id` (
-  `Vehicle_VIn` int(10) NOT NULL,
+  `Vehicle_VIN` int(10) NOT NULL,
   `Plan_ID` int(10) NOT NULL,
   `Date` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
@@ -428,9 +447,13 @@ CREATE TABLE `vehicle_insured_with_plan_id` (
 -- Dumping data for table `vehicle_insured_with_plan_id`
 --
 
-INSERT INTO `vehicle_insured_with_plan_id` (`Vehicle_VIn`, `Plan_ID`, `Date`) VALUES
+INSERT INTO `vehicle_insured_with_plan_id` (`Vehicle_VIN`, `Plan_ID`, `Date`) VALUES
+(123456, 3, '2020-04-27'),
+(555444, 6, '2020-02-12'),
+(987654, 1, '2020-05-06'),
 (2161616, 5, '2020-01-05'),
-(2656961, 5, '2019-01-21');
+(2656961, 5, '2019-01-21'),
+(7878454, 5, '2019-11-04');
 
 -- --------------------------------------------------------
 
@@ -449,8 +472,12 @@ CREATE TABLE `vehicle_involved_in_accident` (
 --
 
 INSERT INTO `vehicle_involved_in_accident` (`Vehicle_VIN`, `Accident_ID`, `Date`) VALUES
+(555444, 6, '2020-06-16'),
+(987654, 5, '2020-06-03'),
 (2161616, 2, '2020-06-02'),
-(2656961, 3, '2020-03-13');
+(2656961, 1, '2020-03-13'),
+(3216515, 3, '2020-05-07'),
+(7878454, 7, '2020-05-26');
 
 --
 -- Indexes for dumped tables
@@ -573,7 +600,7 @@ ALTER TABLE `plan_details`
 -- Indexes for table `vehicle_insured_with_plan_id`
 --
 ALTER TABLE `vehicle_insured_with_plan_id`
-  ADD PRIMARY KEY (`Vehicle_VIn`,`Plan_ID`),
+  ADD PRIMARY KEY (`Vehicle_VIN`,`Plan_ID`),
   ADD KEY `Plan_ID` (`Plan_ID`);
 
 --
@@ -591,13 +618,13 @@ ALTER TABLE `vehicle_involved_in_accident`
 -- AUTO_INCREMENT for table `accident`
 --
 ALTER TABLE `accident`
-  MODIFY `Accident_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `Accident_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `applied_policies`
 --
 ALTER TABLE `applied_policies`
-  MODIFY `Policy_ID` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `Policy_ID` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `customer`
@@ -609,7 +636,7 @@ ALTER TABLE `customer`
 -- AUTO_INCREMENT for table `employees`
 --
 ALTER TABLE `employees`
-  MODIFY `Employee_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `Employee_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `insurance_company`
