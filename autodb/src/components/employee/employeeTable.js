@@ -10,19 +10,26 @@ import TablePagination from '@material-ui/core/TablePagination';
 import TableRow from '@material-ui/core/TableRow';
 
 const columns = [
-  { id: 'Company_ID', label: 'Company_ID', minWidth: 170 },
-  { id: 'Company_Name', label: 'Company_Name', minWidth: 100 },
+  { id: 'Employee_ID', label: 'Employee_ID', minWidth: 170 },
+  { id: 'Company_ID', label: 'Company_ID', minWidth: 100 },
   {
-    id: 'No_Employees',
-    label: 'No_Employees',
-    minWidth: 170,
+    id: 'Name',
+    label: 'Name',
+    minWidth: 100,
     align: 'right',
     format: (value) => value.toLocaleString('en-US'),
   },
   {
-    id: 'No_Customers',
-    label: 'No_Customers',
-    minWidth: 170,
+    id: 'Job_ID',
+    label: 'Job_ID',
+    minWidth: 100,
+    align: 'right',
+    format: (value) => value.toLocaleString('en-US'),
+  },
+  {
+    id: 'Address',
+    label: 'Address',
+    minWidth: 100,
     align: 'right',
     format: (value) => value.toLocaleString('en-US'),
   },
@@ -55,7 +62,7 @@ export default function ({rows}) {
     <Paper className={classes.root}>
       <TableContainer className={classes.container}>
         <Table stickyHeader aria-label="sticky table">
-          <caption>Companies</caption>
+          <caption>Employees</caption> 
           <TableHead>
             <TableRow>
               {columns.map((column) => (
@@ -72,7 +79,7 @@ export default function ({rows}) {
           <TableBody>
             {rows.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((row) => {
               return (
-                <TableRow hover role="checkbox" tabIndex={-1} key={row.Company_ID}>
+                <TableRow hover role="checkbox" tabIndex={-1} key={row.Employee_ID}>
                   {columns.map((column) => {
                     const value = row[column.id];
                     return (
