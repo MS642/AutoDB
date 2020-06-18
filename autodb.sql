@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 18, 2020 at 08:28 AM
+-- Generation Time: Jun 18, 2020 at 08:33 AM
 -- Server version: 10.4.11-MariaDB
 -- PHP Version: 7.4.6
 
@@ -301,7 +301,7 @@ CREATE TABLE `hospitalized` (
 --
 
 INSERT INTO `hospitalized` (`Accident_ID`, `Hospital_Name`, `Room_Number`, `Bill`) VALUES
-(1, 'UBC Hospital', 359, 15000),
+(1, 'Vancouver General Hospital', 359, 15000),
 (2, 'Vancouver General Hospital', 111, 10),
 (3, 'St Peter\'s Hospital', 255, 225990),
 (5, 'North Cross Hospital', 112, 56200),
