@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 18, 2020 at 06:34 AM
+-- Generation Time: Jun 18, 2020 at 08:33 AM
 -- Server version: 10.4.11-MariaDB
 -- PHP Version: 7.4.6
 
@@ -182,9 +182,10 @@ CREATE TABLE `customer_owns_vehicle` (
 
 INSERT INTO `customer_owns_vehicle` (`Vehicle_VIN`, `Model`, `Color`, `Year`, `Customer_ID`) VALUES
 (123456, 'Lexus GS', 'White', 2015, 3),
+(445652, 'Ford F150', 'White', 2019, 1),
 (555444, 'Mercedes E850', 'Black', 2018, 7),
 (987654, 'Jeep', 'Red', 1995, 4),
-(2161616, 'Ford Mustang', 'Red', 67, 5),
+(2161616, 'Ford Mustang', 'Red', 1967, 5),
 (2656961, 'Ford Focus', 'Silver', 2011, 5),
 (3216515, 'Toyota Supra', 'Black', 2009, 2),
 (7878454, 'Toyota Prius', 'Blue', 2015, 4);
@@ -300,7 +301,8 @@ CREATE TABLE `hospitalized` (
 --
 
 INSERT INTO `hospitalized` (`Accident_ID`, `Hospital_Name`, `Room_Number`, `Bill`) VALUES
-(1, 'UBC Hospital', 359, 15000),
+(1, 'Vancouver General Hospital', 359, 15000),
+(2, 'Vancouver General Hospital', 111, 10),
 (3, 'St Peter\'s Hospital', 255, 225990),
 (5, 'North Cross Hospital', 112, 56200),
 (6, 'Vancouver General Hospital', 255, 1800000),
