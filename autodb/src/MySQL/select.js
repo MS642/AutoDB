@@ -14,9 +14,12 @@ con.connect(function(err) {
     if(err) throw err;
     console.log("Connected To the database:");
  
-    var sqlQuery = "SELECT hospital_name, COUNT(hospital_name)  FROM hospitalized\
-    WHERE hospital_name LIKE '%General%'\
-    GROUP BY hospital_name";  
+    var sqlQuery = "SELECT c.Customer_ID FROM customer c\
+    WHERE NOT EXISTS (SELECT v.Vehicle_VIN\
+    FROM customer_owns_vehicle v\
+    WHERE NOT EXISTS (SELECT e.Vehicle_VIN\
+    FROM vehicle_insured_with_plan_id e\
+    WHERE v.Vehicle_VIN = e.Vehicle_VIN AND c.Customer_ID = v.Customer_ID))";  
     // var sqlQuery = "SELECT hospital_name, COUNT(*)  FROM hospitalized\
     // GROUP BY hospital_name";
 

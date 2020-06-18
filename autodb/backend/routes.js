@@ -138,6 +138,26 @@ app.get('/db/aggregate', function (req, res) {
   });
 });
 });
+ 
+app.get('/db/customerall', function (req, res) {
+  // Connecting to the database.
+  connection.getConnection(function (err, connection) {
+    var sqlQuery = "SELECT c.Customer_ID FROM customer c\
+    WHERE NOT EXISTS (SELECT v.Vehicle_VIN\
+    FROM customer_owns_vehicle v\
+    WHERE NOT EXISTS (SELECT e.Vehicle_VIN\
+    FROM vehicle_insured_with_plan_id e\
+    WHERE v.Vehicle_VIN = e.Vehicle_VIN AND c.Customer_ID = v.Customer_ID))"; 
+  // Executing the MySQL query (select all data from the 'users' table).
+  connection.query(sqlQuery, function (error, results, fields) {
+    // If some error occurs, we throw an error.
+    if (error) throw error;
+
+    // Getting the 'response' from the database and sending it to our route. This is were the data is.
+    res.send(results)
+  });
+});
+});
 app.get('/db/join', function (req, res) {
   // Connecting to the database.
   connection.getConnection(function (err, connection) {

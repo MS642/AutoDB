@@ -17,6 +17,7 @@ import Selection from '../components/db/selection-projection';
 import Join from '../components/db/join';
 import Aggregate from '../components/db/aggregation';
 import GroupBy from '../components/db/groupby';
+import CustomerPlans from '../components/db/customers-plans';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -99,6 +100,7 @@ export default function InteractiveList() {
         <Join />
         <Aggregate />
         <GroupBy />
+        <CustomerPlans/>
     </div>
   );
 }
